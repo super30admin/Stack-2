@@ -1,0 +1,44 @@
+/***********
+Time O(n)
+Space O(n)
+Leetcode yes
+Problem no
+*****////
+class Solution {
+    public boolean isValid(String s) {
+        
+        char[] c = s.toCharArray();
+        Stack<Character> stack = new Stack<>();
+        for(char c1 : c)
+        {
+           if(c1 == '(' || c1 == '{' || c1== '[')
+               stack.push(c1);
+            
+            else
+            {
+                if(stack.isEmpty())
+                    return false;
+                if(c1 == ')')
+                {
+                    if(stack.pop() != '(')
+                        return false;
+                }
+                
+                if(c1 == '}')
+                {
+                    if(stack.pop() != '{')
+                        return false;
+                }
+                
+                if(c1 == ']')
+                {
+                    if(stack.pop() != '[')
+                        return false;
+                }
+            }
+        }
+        
+        return stack.isEmpty();
+        
+    }
+}
