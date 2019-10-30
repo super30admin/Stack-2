@@ -28,3 +28,31 @@ class Solution {
         return true;
     }
 }
+
+// Time Complexity : O(n)
+// Space Complexity : O(n)
+class Solution {
+    public int[] exclusiveTime(int n, List<String> logs) {
+        Stack<Integer> st = new Stack<Integer>();
+        int[] res = new int[n];
+        int prev = 0;
+        
+        for(String log: logs){
+            String[] str = log.split(":");
+            int curr = Integer.parseInt(str[2]);
+            if(str[1].equals("start")){
+                if(!st.isEmpty()){
+                    res[st.peek()] += curr - prev;
+                }
+                st.push(Integer.parseInt(str[0]));
+                prev = Integer.parseInt(str[2]);
+            }
+            else{
+                res[st.peek()] += curr - prev+1;
+                st.pop();
+                prev = curr+1;
+            }
+        }
+        return res;
+    }
+}
