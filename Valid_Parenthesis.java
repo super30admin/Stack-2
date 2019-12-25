@@ -34,3 +34,5 @@ class Solution {
         
     }
 }
+//SC:O(n)
+//TC:O(n)
