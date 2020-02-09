@@ -5,13 +5,13 @@
 class Solution {
     public int[] exclusiveTime(int n, List<String> logs) {
         int[] result = new int[n];
-        if(logs == null || logs.size() ==0)   return result;
+        if(logs == null || logs.size() == 0)   return result;
         Stack<Integer> st = new Stack<>();
         int prev =0;
         for(String log : logs){
             String[] arr = log.split(":");
             int curr = Integer.parseInt(arr[2]);
-            if(arr[1].equals("start")){     // if the function starts
+            if(arr[1].equals("start")){     // if the function starts check if the stack is not empty and peek the top function from the stack. And add the difference of curr and prev to the result.
                 if(!st.isEmpty()){
                     result[st.peek()] += curr - prev;
                 }
