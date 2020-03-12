@@ -9,22 +9,22 @@ class Solution:
             Space Complexity - O(n)
             'n' is the number of function functions
         """
-        ans = [0] * n
+        result = [0] * n
         stack = []
         prev_time = 0
         for log in logs:
-            fn, typ, time = log.split(':')
-            fn, time = int(fn), int(time)
+            fn, typ, cur_time = log.split(':')
+            fn, cur_time = int(fn), int(cur_time)
 
             if typ == 'start':
                 if stack:
-                    ans[stack[-1]] += time - prev_time
+                    result[stack[-1]] += cur_time - prev_time
                 stack.append(fn)
-                prev_time = time
+                prev_time = cur_time
             else:
-                ans[stack.pop()] += time - prev_time + 1
-                prev_time = time + 1
-        return ans
+                result[stack.pop()] += cur_time - prev_time + 1
+                prev_time = cur_time + 1
+        return result
 
 
 if __name__ == '__main__':
