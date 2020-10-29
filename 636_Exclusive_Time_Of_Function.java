@@ -10,7 +10,13 @@
         # Optimized approach: 
                               
             Approach   
-                    A. 
+                    A. Tracerse thorugh the logs one by one
+                    B. First check if it "start", if it is then check is stack is empty or not
+                       if stack is not empty then add result[stack.peek()] += currTime - prev; 
+                    C. At the end push first element to the stack and change prev time to the currTime.
+                    D. In else, it is now "end",  result[stack.pop()] += currTime -  prev + 1;
+                       and change prev to currTime + 1;
+                    E. return the result.
 
        */
 class Solution {
