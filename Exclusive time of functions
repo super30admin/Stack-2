@@ -1,0 +1,27 @@
+// maintain prev and curr to check what was the timestamp so achieved
+// time complexity: O(size of the logs)
+// space complexity: O(1/2 of size of the logs)
+class Solution {
+    public int[] exclusiveTime(int n, List<String> logs) {
+        Stack<Integer> stack = new Stack<>();
+        int[] result = new int[n];
+        int curr = 0;
+        int prev = 0;
+        for(String log : logs){
+            String[] record = log.split(":");
+              curr = Integer.parseInt(record[2]);
+            if(record[1].equals("start")){
+                if(! stack.isEmpty()){
+                    result[stack.peek()] += curr - prev;
+                }
+                stack.push(Integer.parseInt(record[0]));
+                prev = curr;
+            }
+            else{
+                result[stack.pop()] += curr - prev + 1;
+                prev = curr + 1;
+            }
+        }
+        return result;
+    }
+}
