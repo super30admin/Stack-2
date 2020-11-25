@@ -1,0 +1,26 @@
+//space : O(n)
+// time : O(n)
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        for(int i = 0; i < s.length(); i++){
+            char ch = s.charAt(i);
+            if(ch == '{' || ch == '(' || ch == '['){ // openning brackets
+                stack.push(ch);
+            }
+            else if(stack.isEmpty()){  // no opening brackets
+    // stack is empty: means we are able to find only closing brackets with no opening brackets
+                return false;
+            }
+            else{ // closing brackets
+                if(ch == '}' && stack.peek() == '{') stack.pop();                                   
+                else if(ch == ']' && stack.peek() == '[') stack.pop();
+                else if(ch == ')' && stack.peek() == '(') stack.pop();
+                else  // brackets not in order -> no correct match for found closing bracket
+                    return false;
+            }
+        }
+        // didn't find sufficient closing brackets to satisfy the opening brackets
+        return stack.isEmpty(); // no closing brackets
+    }
+}
