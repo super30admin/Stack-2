@@ -9,35 +9,36 @@
 // in the end check for stack not empty
 
 class Solution {
+    
+    private HashMap<Character, Character> mappings;
+    
+    public Solution(){
+        mappings = new HashMap<>();
+        mappings.put(')', '(');
+        mappings.put(']', '[');
+        mappings.put('}', '{');
+    }
+    
     public boolean isValid(String s) {
-        Stack<Character> stack = new Stack<Character>();
+        Stack<Character> stack = new Stack<>();
         
         for(int i=0; i<s.length(); i++){
             char ch = s.charAt(i);
             
-            if(ch=='(' || ch=='{' || ch=='['){
+            if(!mappings.containsKey(ch)){
                 stack.push(ch);
             }
             else{
-                if(stack.isEmpty()) 
+                if(stack.isEmpty())
                     return false;
                 
-                if(ch==')' && stack.peek()=='(')
-                    stack.pop();
-                
-                else if(ch=='}' && stack.peek()=='{')
-                    stack.pop();
-                
-                else if(ch==']' && stack.peek()=='[')
-                    stack.pop();
-                
-                else return false;
+                char top = stack.pop();
+                if(top != mappings.get(ch)){
+                    return false;
+                }
             }
         }
         
-        if(!stack.isEmpty()) 
-            return false;
-        
-        return true;
-    }
+        return stack.isEmpty();
+    }   
 }
