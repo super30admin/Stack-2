@@ -1,5 +1,5 @@
-// Time Complexity : O(n)
-// Space Complexity : O(n)
+// Time Complexity : O(l) where l is the length of the logs
+// Space Complexity : O(l)
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
 import java.util.List;
