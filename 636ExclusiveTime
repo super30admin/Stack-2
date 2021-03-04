@@ -1,0 +1,37 @@
+class Solution {
+    //636. Exclusive Time of Functions
+    //Time complexity : O(m) where m is the size of logs list
+    //Space complexity is O(n) where n is the no. of events
+    
+    
+    public int[] exclusiveTime(int n, List<String> logs) {
+        
+        int len = logs.size();
+        int[] res = new int[n];
+        
+        if(logs == null || len ==0)
+            return res;
+        Stack<Integer> st = new Stack<>();
+        int prev =0;
+        
+        for(String log :logs){
+            String[] arr = log.split(":"); // arr = [0,start,0]
+             int curr = Integer.parseInt(arr[2]);
+            if(arr[1].equals("start")){
+               if(!st.isEmpty()){
+                res[st.peek()] += curr - prev;
+                prev = curr;
+                
+               }
+               st.push(Integer.parseInt(arr[0]));
+            }
+            else   //end
+            {
+               
+                res[st.pop()]+= curr -prev +1;
+                prev = curr+1;
+            }
+        }
+        return res;
+    }
+}
