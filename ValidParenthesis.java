@@ -2,6 +2,8 @@
 //TC:O(N)
 //SC:O(N)
 
+//Note:Ask interviewer how many types of brackets are there, if there is only 1 type, then dont use the stack, just use a count variable such as 'open' and 'close'. If at any stage 'close' is greater than 'open' just return false or in end if 'close' is not equal to 'open' then also return false;
+
 import java.util.*;
 class Solution135 {
     
