@@ -1,11 +1,12 @@
 ///Valid Paranthesis
-// Time Complexity :
-// Space Complexity :
-// Did this code successfully run on Leetcode :
-// Any problem you faced while coding this :
+// Time Complexity :O(n)
+// Space Complexity :O(n) - stack
+// Did this code successfully run on Leetcode :Yes
+// Any problem you faced while coding this :No
 
 
 // Your code here along with comments explaining your approach
+//using stack to store each bracket and keeping track of opening and closing them
 import java.util.*;
 public class Problem2 {
     public static void main(String[] args){
