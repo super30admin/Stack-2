@@ -1,0 +1,28 @@
+class Solution {
+    public int[] exclusiveTime(int n, List<String> logs) {
+        int[] res=new int[n];
+        if(logs==null || logs.size()==0) return res;
+        Stack<Integer> st=new Stack<>();
+        int prev=0;
+        for(String log:logs){
+            String[] split=log.split(":");
+            int cur=Integer.parseInt(split[2]);
+            if(split[1].equals("start")){
+                if(!st.isEmpty()){
+                    res[st.peek()]+=cur-prev;
+                    prev=cur;
+                }
+                st.push(Integer.parseInt(split[0]));
+                }
+                else {
+                   if(!st.isEmpty()){
+                    res[st.pop()]+=cur-prev+1;
+                    prev=cur+1;
+                }  
+                }
+            }
+        
+        return res;
+    }}
+//tc: O(max(logs,n))
+//sc: O(max(logs,n))
