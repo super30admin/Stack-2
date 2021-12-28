@@ -1,0 +1,69 @@
+
+//TC:- O(n)
+//SC:- O(n)
+class Solution {
+    public boolean isValid(String s) {
+        
+        Stack<Character> stack = new Stack<>();
+        
+        for(int i = 0; i < s.length(); i++)
+        {
+            Character c = s.charAt(i);
+            
+                switch(c)
+                {
+                    case '{':
+                        stack.push(c);
+                        break;
+                        
+                    case '(':
+                        stack.push(c);
+                        break;
+                    
+                    case '[':
+                        stack.push(c);
+                        break;
+                    
+                    case ']':
+                        if(isDiscrepencyFound('[', stack))
+                        {
+                            return false;
+                        }
+                        
+                        stack.pop();
+                        break;
+                    
+                    case ')':
+                        if(isDiscrepencyFound('(', stack))
+                        {
+                            return false;
+                        }
+                        
+                        stack.pop();
+                        break;
+                        
+                    case '}':
+                        if(isDiscrepencyFound('{', stack))
+                        {
+                            return false;
+                        }
+                        
+                        stack.pop();
+                        break;
+                        
+                    
+                }
+        }
+       return stack.isEmpty(); 
+    }
+    
+    private boolean isDiscrepencyFound(Character c, Stack<Character> stack)
+    {
+        if(stack.isEmpty() || stack.peek() != c)
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+}
