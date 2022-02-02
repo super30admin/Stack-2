@@ -5,23 +5,23 @@
 
 
 // Your code here along with comments explaining your approach
-// We use a stack to store the opening parantheses and when we encounter a closing parantheses we pop and compare with the top of stack
+// We use a stack to store the closing parantheses when we encounter an opening parantheses and
+// we pop and compare with the top of stack in case of opening parantheses
 class Solution {
     public boolean isValid(String s) {
         Stack<Character> stack = new Stack<>();
 
-        for (char c: s.toCharArray()) {
-            if (c == '(' || c == '{' || c == '[') {
-                stack.push(c);
-            }
-            else {
-                char out = stack.pop();
-                if ((c == ')' && out != '(') || (c == '}' && out != '{') || (c == ']' && out != '[')) {
-                    return false;
-                }
-            }
+        for(Character c:s.toCharArray()) {
+            if (c=='(')
+                stack.push(')');
+            else if (c=='[')
+                stack.push(']');
+            else if (c=='{')
+                stack.push('}');
+            else if(stack.isEmpty() || stack.pop() != c)
+                return false;
         }
 
-        return true;
+        return stack.isEmpty();
     }
 }
