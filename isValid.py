@@ -1,4 +1,8 @@
 class Solution:
+    '''
+    T = O(N)
+    S = O(N)
+    '''
     def isValid(self, s: str) -> bool:
         stack = []
         dict_ = {'(' : ')',
