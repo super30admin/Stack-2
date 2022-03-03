@@ -1,0 +1,28 @@
+//tc: O(n)
+//sc: O(n)
+//passed on leetcode: yes
+// when open bracket comes, put in closing bracket in stack, when a closing bracket comes, check if it matches to the one on the pop of the stack, if it does, continues, else, return false
+class Solution {
+    public boolean isValid(String s) {
+        if (s==null || s.length() == 0) return true;
+        Stack<Character> A = new Stack<>(); 
+        int len = s.length();
+        for( int i = 0 ; i < len; i++){
+                char c = s.charAt(i);
+	            if (c == '(') {
+	                A.push(')');
+                }
+                else if (c == '{') {
+                    A.push('}');
+                }
+                else if (c == '[') {
+                    A.push(']');
+                }
+                else if (A.isEmpty() || A.pop() != c){
+  	                return false;
+                }
+            }
+        if (!A.isEmpty()) return false;
+        return true;
+    }
+}
