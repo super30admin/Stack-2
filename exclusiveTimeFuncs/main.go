@@ -11,17 +11,17 @@ func exclusiveTime(n int, logs []string) []int {
         funcId,_ := strconv.Atoi(logSplit[0])
         logType := logSplit[1]
         t,_ := strconv.Atoi(logSplit[2])
-        
+        topIdx := len(st)-1
         curr = t
         if logType == "start" {
             if len(st) != 0 {
-                result[st[len(st)-1]] += curr-prev
+                result[st[topIdx]] += curr-prev
             }
             st = append(st, funcId)
             prev = curr
         } else {
-            top := st[len(st)-1]
-            st = st[:len(st)-1]
+            top := st[topIdx]
+            st = st[:topIdx]
             result[top] += curr+1-prev
             prev = curr + 1
         }
