@@ -1,6 +1,6 @@
 //******135.20. VALID PARANTHESIS*****
 // Time Complexity :O(N);
-// Space Complexity :O(1);
+// Space Complexity :O(N);
 // Did this code successfully run on Leetcode :Y;
 // Any problem you faced while coding this :N;
 
