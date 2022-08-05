@@ -1,3 +1,5 @@
+# time complexity is o(n), where n is the size of the input
+# space complexity is o(n), where n is the size of the input
 class Solution:
     def isValid(self, s: str) -> bool:
         if(len(s) == 0 or len(s)%2 == 1):
