@@ -1,0 +1,31 @@
+class Solution:
+    def exclusiveTime(self, n: int, logs: List[str]) -> List[int]:
+        #TimeComplexity: O(N + M) N = number of logs, M = number of processors
+        #SpaceComplexity: O(N/2) N = number of the logs
+        stack = []
+        results = [0]*n
+        
+        time_dict = collections.defaultdict(list)
+        last_time = 0
+        prev_function = None
+        
+        for log in logs:
+            function, key, time = log.split(":")
+            function, time = int(function), int(time)
+            
+            if key == "start":
+                if stack:
+                    prev_function, prev_time = stack[0]
+                stack.insert(0, (function, time))
+            else:
+                time += 1
+                prev_function, prev_time = stack.pop(0)
+                
+            diff = time - last_time
+            time_dict[prev_function].append(diff)
+            last_time = time
+        
+        for i in range(n):
+            results[i] = sum(time_dict[i])
+            
+        return results
