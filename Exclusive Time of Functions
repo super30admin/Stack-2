@@ -1,0 +1,22 @@
+class Solution:
+    def exclusiveTime(self, n: int, logs: List[str]) -> List[int]:
+        res = [0] * n
+        stk = []
+        a = None
+        for b in logs:
+            f_id, event, t = b.split(':')
+            f_id, t = int(f_id), int(t)
+            if event == 'start':                                    
+                if stk:                                          
+                    res[stk[-1]] += t - a
+                stk.append(f_id)
+                a = t
+            elif event == 'end':
+                c = stk.pop()                
+                res[c] += t - a + 1
+                a = t + 1   
+        return res
+    
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+# Successfully implemented on Leetcode
