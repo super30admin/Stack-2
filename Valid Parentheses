@@ -1,0 +1,18 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        p = {
+            "(": ")",
+            "[": "]",
+            "{": "}"
+        }
+        stk = []
+        for c in s:
+            if c in p:
+                stk.append(c)
+            elif not stk or p[stk.pop()] != c:
+                return False
+        return not stk
+    
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+# Successfully implemented on Leetcode
