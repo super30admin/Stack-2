@@ -1,0 +1,35 @@
+/* TC O(n)*/
+/*SC O(1),  as stack would be always of size 3*/
+
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> st;
+        st.push(s[0]);
+        unordered_map<char,char> map;
+        map[')'] ='(';
+        map['}'] ='{';
+        map[']'] ='[';
+        for(int i =1 ; i<s.length(); i++){
+            
+            if(s[i]=='(' || s[i]=='{' || s[i]=='[' ){
+                st.push(s[i]);
+            }
+            else if(st.empty() && (s[i] == ')' || s[i]==']' || s[i] == '}') ){
+                return false;
+            }
+            else if(s[i] == ')' || s[i]==']' || s[i] == '}'){
+                if(st.top() != map[s[i]]){
+                    return false;
+                }
+                else{
+                    st.pop();
+                }
+            }    
+        }
+        if(st.empty())
+        return true;
+        else
+            return false;
+    }
+};

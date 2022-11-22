@@ -1,0 +1,40 @@
+class Solution {
+public:
+    vector<int> exclusiveTime(int n, vector<string>& logs) {
+        vector<int> ans(n,0);
+        stack<int> s;
+        int curr = 0;
+        int prev = 0;
+        for(auto log : logs){
+            stringstream ss(log);
+            string ID, type, INDEX;
+            getline(ss, ID, ':');
+            getline(ss, type, ':');
+            getline(ss, INDEX, ':');
+            int id = stoi(ID);
+            int index = stoi(INDEX);
+            
+                if(type == "start"){
+                        
+                    if(s.empty()){   /*direct id push*/
+                            s.push(id);
+                    }
+                    else{
+                        curr = index;   /*  current updates with index of now */
+                        ans[s.top()] += curr-prev; /* stack top has prev element which will stop now, so the current start index will decide how much prev one ran, so its value will be curr-prev*/
+                        prev = curr; /* operation done, so for sake of next one we will update prev so that it will be used for next one*/
+                        s.push(id); /* now this ID will run so stack top position for it*/
+                        }
+                }
+                else{
+                    curr = index +1; /*+1 as it ends when that index end*/
+                    ans[s.top()] += curr - prev; 
+                    prev = curr ; 
+                    s.pop(); 
+                }
+
+            }
+            
+            return ans;
+    }
+};
