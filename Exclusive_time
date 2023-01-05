@@ -1,0 +1,30 @@
+//TimeComplexity.  O(n)
+//SpaceComplexity. O(n)
+
+class Solution {
+    public int[] exclusiveTime(int n, List<String> logs) {
+        
+        Stack<Integer> st = new Stack<>();
+        int[] result = new int[n];
+        int curr = 0;
+        int prev = 0;
+
+        for(String s : logs){
+            String[] str = s.split(":");
+            curr = Integer.parseInt(str[2]);
+
+            if(str[1].equals("start")){
+                    if(!st.isEmpty())
+                    result[st.peek()] += curr - prev;
+                    prev = curr;
+                    st.push(Integer.parseInt(str[0]));
+                    
+
+            }else{
+                    result[st.pop()] += (curr + 1)- prev;
+                    prev = curr + 1;
+            }
+        }
+        return result;
+    }
+}
