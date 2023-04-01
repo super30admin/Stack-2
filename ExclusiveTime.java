@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.Stack;
 //Time Complexity : O(N)
-//Space Complexity : O()
+//Space Complexity : O(n)
 //Did this code successfully run on Leetcode : Yes
 //Any problem you faced while coding this : No
 
