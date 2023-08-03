@@ -1,37 +1,33 @@
+// Time Complexity :O(n) where n is the number of functions
+// Space Complexity :O(n) where n is the number of functions
+// Did this code successfully run on Leetcode :yes
 import java.util.List;
 import java.util.Stack;
-
 public class ExclusiveTimeOfFunctions {
     public int[] exclusiveTime(int n, List<String> logs) {
-        int[] result = new int[n];
+
         Stack<Integer> st = new Stack<>();
+        int[] result = new int[n];
+        int previousTime = 0;
 
-        String current = logs.get(0);
-        String[] init = current.split(":");
+        for(String log : logs){
 
-        int lastFunctionId = Integer.valueOf(init[0]);
-        int lastTimeStamp = Integer.valueOf(init[2]);
-        st.push(lastFunctionId);
+            String[] currentLog = log.split(":");
+            int currentFunction = Integer.parseInt(currentLog[0]);
+            String currentAction = currentLog[1];
+            int currentTime = Integer.parseInt(currentLog[2]);
 
-        for(int i=1; i< logs.size(); i++){
-            current = logs.get(i);
-            String[] currArr = current.split(":");
-
-            int currentFunctionId = Integer.valueOf(currArr[0]);
-            int currentTimeStamp = Integer.valueOf(currArr[2]);
-            if("start".compareTo(currArr[1]) == 0){
-                st.push(currentFunctionId);
-                result[lastFunctionId] += currentTimeStamp - lastTimeStamp;
-                lastTimeStamp = currentTimeStamp;
-                lastFunctionId = currentFunctionId;
-            }else{
-                //end
-                int top = st.pop();
-                result[top] += currentTimeStamp - lastTimeStamp + 1;
-                lastTimeStamp = currentTimeStamp + 1;
-                if (!st.empty()) {
-                    lastFunctionId = st.peek();
+            if(currentAction.compareTo("start") == 0){
+                if(!st.isEmpty()){
+                    int top = st.peek();
+                    result[top] += currentTime - previousTime;
                 }
+                st.push(currentFunction);
+                previousTime = currentTime;
+            }else{
+                int top = st.pop();
+                result[top] += currentTime + 1 - previousTime;
+                previousTime = currentTime + 1;
             }
         }
         return result;
