@@ -1,0 +1,32 @@
+// Time Complexity o(n) Space Complexity o(n)
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> a=new Stack<Character>();
+        for(char c:s.toCharArray()){
+            if(c=='(')
+            {
+             a.push(')');
+            }
+             if(c=='[')
+            {
+            a.push(']');
+            }
+             if(c=='{')
+            {
+              a.push('}');  
+            }
+            if(c==')'||c=='}'||c==']'){
+                if(a.isEmpty()||c!=a.peek()){
+                    return false;
+                }
+                else{
+                    a.pop();
+                }
+            }
+        }
+        if(!a.isEmpty()){
+            return false;
+        }
+        return true;
+    }
+}
