@@ -1,0 +1,32 @@
+/*
+Time Complexity - O(n)
+Space Complexity - O(n)
+*/
+class Solution {
+    public int[] exclusiveTime(int n, List<String> logs) {
+        int[] ans = new int[n];
+        Stack<Integer> stack = new Stack<>();
+        int prev = 0;
+        for(String s : logs) {
+            String[] arr = s.split(":");
+            int fnID = Integer.parseInt(arr[0]);
+            boolean start = "start".equals(arr[1]);
+            int fnTime = Integer.parseInt(arr[2]);
+
+            if (!start) {
+                fnTime = fnTime + 1;
+            }
+
+            if (!stack.isEmpty()) {
+                ans[stack.peek()] += fnTime - prev;
+            }
+            if (start) {
+                stack.push(fnID);
+            } else {
+                stack.pop();
+            }
+            prev = fnTime;
+        }
+        return ans;
+    }
+}
