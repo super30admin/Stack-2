@@ -1,4 +1,4 @@
-# TC - O(N), SC - O(1)
+# TC - O(N), SC - O(N)
 # Creating dictionary and checking the match of closing characters with their opening character
 class Solution:
     def isValid(self, s: str) -> bool:
