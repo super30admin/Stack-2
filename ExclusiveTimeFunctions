@@ -1,0 +1,35 @@
+// https://leetcode.com/problems/exclusive-time-of-functions/description/
+// Time Complexity: O(n)
+// Space Complexity: O(n)
+
+class Solution {
+    public int[] exclusiveTime(int n, List<String> logs) {
+        int[] result = new int[n];
+        Stack<Integer> st = new Stack<>();
+        int prevTime = 0;
+        for(String k: logs) {
+            String[] str = parseStr(k);
+            int fn = Integer.parseInt(str[0]);
+            String action = str[1];
+            int time = Integer.parseInt(str[2]);
+             if (action.equals("start")) {
+                if (!st.isEmpty()) {
+                    result[st.peek()] += time - prevTime;
+                }
+                st.push(fn);
+                prevTime = time;
+            } else {
+                result[st.pop()] += time - prevTime + 1;
+                prevTime = time + 1;
+            }
+        }
+
+        return result;
+    }
+
+    private String[] parseStr(String logs) {
+        String[] arrOfStr = logs.split(":");
+        System.out.println(Arrays.deepToString(arrOfStr));
+        return arrOfStr;
+    }
+}
