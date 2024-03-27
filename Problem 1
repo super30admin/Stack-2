@@ -1,0 +1,24 @@
+# Exclusive Time of Function
+
+# the time complexity of the exclusiveTime method is O(N), and the space complexity is O(n), where N is the length of the logs list, and n is the number of functions.
+
+class Solution:
+    def exclusiveTime(self, n: int, logs: List[str]) -> List[int]:
+        result = [0] * n
+        stack = []
+        prev_timestamp = 0
+        
+        for log in logs:
+            function_id, event, timestamp = log.split(':')
+            function_id, timestamp = int(function_id), int(timestamp)
+            
+            if event == 'start':
+                if stack:
+                    result[stack[-1]] += timestamp - prev_timestamp
+                stack.append(function_id)
+                prev_timestamp = timestamp
+            else:  # event == 'end'
+                result[stack.pop()] += timestamp - prev_timestamp + 1
+                prev_timestamp = timestamp + 1
+                
+        return result

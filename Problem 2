@@ -1,0 +1,24 @@
+# Valid Parentheses
+
+This implementation has a time complexity of O(N), where N is the length of the string s, because we iterate through each character in the string once. 
+The space complexity is also O(N) because the worst-case scenario occurs when all characters are opening parentheses, and they are all pushed onto the stack.
+
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stack = []  # Initialize a stack to store opening parentheses
+        
+        # Define a dictionary to store mappings of opening and closing parentheses
+        mapping = {")": "(", "}": "{", "]": "["}
+        
+        # Iterate through each character in the string
+        for char in s:
+            # If the current character is an opening parenthesis, push it onto the stack
+            if char in mapping.values():
+                stack.append(char)
+            else:
+                # If the stack is empty or the top element of the stack doesn't match the corresponding opening parenthesis, return False
+                if not stack or mapping[char] != stack.pop():
+                    return False
+        
+        # If the stack is empty, return True; otherwise, return False
+        return not stack
