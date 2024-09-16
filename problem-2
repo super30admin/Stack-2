@@ -1,0 +1,38 @@
+//time :O(n)
+//space : O(n)
+class Solution {
+    public boolean isValid(String s) {
+        if(s==null || s.length()==0) return true;
+        Stack<Character> st=new Stack<>();
+        for(int i=0;i<s.length();i++)
+        {
+            if(s.charAt(i)=='(' || s.charAt(i)=='{' || s.charAt(i)=='[')
+            {
+                st.push(s.charAt(i));
+            }
+            //imp to check, what if we have all as closing brackets only and stack remains empty when we encounter any
+             if(st.isEmpty())
+            {
+                return false;
+            }
+            else if(!st.isEmpty() && s.charAt(i)==')'){
+               char c= st.pop();
+                if(c!='(')
+                    return false;
+                }
+         else if(!st.isEmpty() && s.charAt(i)=='}'){
+               char c= st.pop();
+                if(c!='{')
+                    return false;
+                }
+            
+             else if(!st.isEmpty() && s.charAt(i)==']'){
+               char c= st.pop();
+                if(c!='[')
+                    return false;
+                }
+        }
+        if(!st.isEmpty()) return false;
+        return true;
+    }
+}

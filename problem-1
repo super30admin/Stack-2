@@ -1,0 +1,31 @@
+//time: O(n)
+//space :O(n)
+class Solution {
+    public int[] exclusiveTime(int n, List<String> logs) {
+        int prev=0;
+        Stack<Integer> st=new Stack<>();
+        int[] res=new int[n];
+         for(String log: logs)
+        {
+            String[] arr=log.split(":");
+            //get start time pointing to index 2 
+            int curr=Integer.parseInt(arr[2]);
+            if(arr[1].equals("start"))
+            {
+                
+                if(!st.isEmpty())
+               res[st.peek()]+=curr-prev;
+                //push after peeking the previous one, dont do it before 
+               st.push(Integer.parseInt(arr[0]));
+               prev=curr;
+            }
+            else
+            {
+                int idx=st.pop();
+                res[idx]+=curr-prev+1;
+                prev=curr+1;
+            }
+        }
+        return res;
+    }
+}
