@@ -1,0 +1,23 @@
+res = [0 for _ in range(n)]
+        s = []
+        currt = 0
+		
+        for log in logs: 
+                
+            fid, state, timestamp = log.split(":")
+            
+            fid = int(fid)
+            timestamp = int(timestamp)
+            
+            if state == "end":
+                s.pop()
+                res[fid] += timestamp - currt+1
+                currt = timestamp + 1
+            else:
+                if (s):
+                    fidprev,time = s[-1]
+                    res[fidprev] += timestamp - currt
+                s.append((fid,timestamp))
+                currt = timestamp
+            
+        return res
