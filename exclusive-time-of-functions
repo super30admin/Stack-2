@@ -1,0 +1,38 @@
+// Time Complexity :O(m)+O(n)//O(n) to create n task array
+// Space Complexity :O(n)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+
+
+// Your code here along with comments explaining your approach:
+
+class Solution {
+    public int[] exclusiveTime(int n, List<String> logs) {
+        int m = logs.size();
+        Stack<Integer> st = new Stack<Integer>();//to process logs
+        int[] arr = new int[n];//functions array
+        int prevTime = 0;
+        for (int i = 0; i < m; i++) {
+            String str = logs.get(i);
+            String[] strArr = str.split(":");
+            int task = Integer.parseInt(strArr[0]);
+            String type = strArr[1];
+            int currTime = Integer.parseInt(strArr[2]);
+            if (type.equals("start")) {
+                if (!st.isEmpty()) {
+                    int peek = st.peek();
+                    arr[peek] += currTime - prevTime;//updating last function running time
+                    prevTime = currTime;
+                }
+                st.push(task);//as function is starting
+            } else {
+                int popped = st.pop();//popping the task as ended
+                arr[popped] += currTime - prevTime + 1;//updatin gits runtime
+                prevTime = currTime + 1;
+            }
+
+        }
+        return arr;
+
+    }
+}
