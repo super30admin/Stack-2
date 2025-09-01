@@ -1,0 +1,34 @@
+class Solution {
+    public boolean isValid(String s) {
+        if(s == null){
+            return false;
+        }
+        Stack<Character> st = new Stack<>();
+        //Using Stack, when encounter a open bracket, add to stack
+        for(int i = 0; i< s.length(); i++){
+            char c = s.charAt(i);
+            if(c == '(' || c == '{' || c == '['){
+                st.push(c);
+            }
+            //for closed bracket, check the top element in stack matches or not
+            else{
+                if(st.isEmpty()){
+                    return false;
+                }
+                if(c == ')' && st.peek() != '('){
+                    return false;
+                }
+                if(c == '}' && st.peek() != '{'){
+                    return false;
+                }
+                if(c == ']' && st.peek() != '['){
+                    return false;
+                }
+                //if matches, pop it
+                st.pop();
+            }
+        }
+        //check all open brackets are closed or not,
+        return st.isEmpty();
+    }
+}

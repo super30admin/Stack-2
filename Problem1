@@ -1,0 +1,33 @@
+class Solution {
+    public int[] exclusiveTime(int n, List<String> logs) {
+        if(n == 0 || logs == null){
+            return new int[]{};
+        }
+        //Using stack, add ids in stack, and keep track of prev and curr timestamps
+        Stack<Integer> st = new Stack<>();
+        int[] re = new int[n];
+        int curr = 0; 
+        int prev = 0;
+        for(String entry : logs){
+            String[] s = entry.split(":");
+            //when function start, add the curr-prev time to before function and add this to stack
+            if(s[1].equals("start")){
+                prev = curr;
+                curr = Integer.parseInt(s[2]);
+                if(!st.isEmpty()){
+                    re[st.peek()] = re[st.peek()] + curr - prev;
+                }
+                st.add(Integer.parseInt(s[0]));
+            }
+            else{
+                //when function ends, update prev and curr values and add (cuur+1) - prev to its time
+                prev = curr;
+                curr = Integer.parseInt(s[2]);
+                re[st.peek()] = re[st.peek()] + curr + 1 - prev;
+                curr = curr + 1;
+                st.pop();
+            }
+        }
+        return re;
+    }
+}
