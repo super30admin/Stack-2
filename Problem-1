@@ -1,0 +1,34 @@
+// Time Complexity : O(m), m -> length of logs
+// Space Complexity : O(n)
+
+// Use a stack to keep track of the start of functions
+// When a new start logs occurs, update the result array for time run by the previous function by using a prev and curr pointer
+// When a end log occurs, update the result array and pop from the stack
+
+class Solution {
+    public int[] exclusiveTime(int n, List<String> logs) {
+        Stack<Integer> st = new Stack<>();
+        int[] result = new int[n];
+        int prev = 0;
+
+        for(String str : logs) {
+            String[] log = str.split(":");
+            int taskId = Integer.parseInt(log[0]);
+            int curr = Integer.parseInt(log[2]);
+
+            // Start log - Add function id to stack and update execution time
+            if(log[1].equals("start")) {
+                if(!st.isEmpty())
+                    result[st.peek()] += curr - prev;
+                st.push(taskId);
+            }
+            // End log - Pop from the stack
+            else {
+                curr++;
+                result[st.pop()] += curr - prev;
+            }
+            prev = curr;
+        }
+        return result;
+    }
+}

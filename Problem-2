@@ -1,0 +1,34 @@
+// Time Complexity : O(n)
+// Space Complexity : O(n)
+
+// Use a stack to keep track of open parentheses
+// When a closing parentheses occurs compare if the top of stack contains the matching one, if not return false
+// If it does pop from the stack and continue till end of string
+// If the stack is empty in the end then return true else return false
+
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        for(char ch : s.toCharArray()) {
+            // Add opening parentheses to stack
+            if(ch == '(' || ch == '{' || ch == '[')
+                stack.push(ch);
+            else if(stack.isEmpty())
+                return false;
+            // Check closing parentheses with top of stack
+            else {
+                if(ch == ')' && stack.peek() == '(')
+                    stack.pop();
+                else if(ch == '}' && stack.peek() == '{')
+                    stack.pop();
+                else if(ch == ']' && stack.peek() == '[')
+                    stack.pop();
+                else
+                    return false;
+            }
+        }
+        if(!stack.isEmpty())
+            return false;
+        return true;
+    }
+}
