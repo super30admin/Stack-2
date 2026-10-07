@@ -1,30 +1,19 @@
-9// Did this code successfully run on Leetcode : Yes 
-// Any problem you faced while coding this : No
-
-//Time Complexity : O(n) since we are iterating through the entire array only once
-//Space Complexity: O(n) since we are using an extra stack
-
+//Time Complexity: O(n)
+//Space Complexity: O(n)
 class Solution {
     public boolean isValid(String s) {
+        char[] charArr = s.toCharArray();
         Stack<Character> st = new Stack<>();
-        
-        char[] strs = s.toCharArray();
-        
-        for(char c : strs){
-            switch(c)
-            {
-                case '(':
-                    st.push(')');
-                    break;
-                case '{':
-                    st.push('}');
-                    break;
-                case '[':
-                    st.push(']');
-                    break;
-                default:
-                    if(st.isEmpty() || st.pop() != c) return false;
-                    break;
+        for(char c : charArr)
+        {
+            if(c == '('){
+                st.push(')');
+            } else if (c == '['){
+                st.push(']');
+            } else if (c == '{'){
+                st.push('}');
+            } else if (st.isEmpty() || st.pop() != c){
+                return false;
             }
         }
         return st.isEmpty();
