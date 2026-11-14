@@ -10,20 +10,22 @@
 # If yes then append the value to stack
 # If no then check if stack is not empty and if the stack[-1] == string then pop the stack
 # If it doesnt match return False
-# Return True
+# Return True if stack is empty and no string left in stack
 
 
 class Solution:
     def isValid(self, s: str) -> bool:
-        if not s:
-            return None
-        dict = {'{': '}', '[': ']', '(': ')'}
+        pdict = {
+            '(':')',
+            '{':'}',
+            '[':']'
+        }
         stack = []
         for i in range(len(s)):
-            if s[i] in dict:
-                stack.append(dict[s[i]])
+            if s[i] in pdict:
+                stack.append(pdict[s[i]])
             elif stack and s[i] == stack[-1]:
                 stack.pop()
             else:
                 return False
-        return len(stack) == 0
+        return not stack
